@@ -1,0 +1,8 @@
+.product-list-container {
+  margin: 30px auto;
+  padding: 0;
+  max-width: 1200px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

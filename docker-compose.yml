@@ -1,0 +1,34 @@
+version: "3.2"
+services:
+  meli-client:
+    image: "meli-client"
+    build: ./meli-client
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - meli-server
+    volumes:
+      - ./meli-client:/usr/src
+      - /usr/src/node_modules
+    ports:
+      - "3000:3000"
+    container_name: "meli-client"
+    working_dir: "/usr/src"
+    stdin_open: true
+    tty: true
+  meli-server:
+    image: "meli-server"
+    build: ./meli-server
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    env_file:
+      - ./meli-server/.env
+    volumes:
+      - ./meli-server:/usr/src
+      - /usr/src/node_modules
+    ports:
+      - "8081:8081"
+    container_name: "meli-server"
+    working_dir: "/usr/src"
+    stdin_open: true
+    tty: true
